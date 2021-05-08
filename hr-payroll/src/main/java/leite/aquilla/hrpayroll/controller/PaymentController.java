@@ -11,7 +11,7 @@ import leite.aquilla.hrpayroll.entity.Payment;
 import leite.aquilla.hrpayroll.service.PaymentService;
 
 @RestController
-@RequestMapping("api/v1/payments")
+@RequestMapping("payments")
 public class PaymentController {
 
 	PaymentService paymentService;

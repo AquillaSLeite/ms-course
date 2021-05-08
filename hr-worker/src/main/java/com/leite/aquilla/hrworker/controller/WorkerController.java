@@ -13,7 +13,7 @@ import com.leite.aquilla.hrworker.entity.Worker;
 import com.leite.aquilla.hrworker.service.WorkerService;
 
 @RestController
-@RequestMapping("/api/v1/workers")
+@RequestMapping("/workers")
 public class WorkerController {
 
 	WorkerService workerService;

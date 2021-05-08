@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import leite.aquilla.hrpayroll.entity.Worker;
 
 @Component
-@FeignClient(name = "hr-worker", path = "/api/v1/workers")
+@FeignClient(name = "hr-worker", path = "/workers")
 public interface WorkerFeignClient {
 
 	@GetMapping("{id}")
