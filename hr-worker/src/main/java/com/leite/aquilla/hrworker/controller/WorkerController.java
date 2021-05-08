@@ -2,10 +2,7 @@ package com.leite.aquilla.hrworker.controller;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,11 +18,6 @@ import com.leite.aquilla.hrworker.service.WorkerService;
 @RequestMapping("/workers")
 public class WorkerController {
 
-	private static Logger logger = LoggerFactory.getLogger(WorkerController.class);
-
-	@Value("${test.config}")
-	private String testConfig;
-
 	WorkerService workerService;
 
 	@Autowired
@@ -36,13 +28,11 @@ public class WorkerController {
 
 	@GetMapping
 	public ResponseEntity<List<Worker>> index() {
-		return ResponseEntity.ok().body(workerService.findAll());
+		return ResponseEntity.ok(workerService.findAll());
 	}
 
 	@GetMapping("{id}")
 	public ResponseEntity<Worker> show(@PathVariable Long id) {
-		logger.info("CONFIG = " + this.testConfig);
-		return ResponseEntity.ok().body(workerService.findById(id));
+		return ResponseEntity.ok(workerService.findById(id));
 	}
-
 }
