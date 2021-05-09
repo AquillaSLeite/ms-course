@@ -4,6 +4,6 @@ INSERT INTO users (name, email, password) VALUES ('Leia Red', 'leia@gmail.com', 
 INSERT INTO roles (role_name) VALUES ('ROLE_OPERATOR');
 INSERT INTO roles (role_name) VALUES ('ROLE_ADMIN');
 
-INSERT INTO users_roles (user, role) VALUES (1, 1);
-INSERT INTO users_roles (user, role) VALUES (2, 1);
-INSERT INTO users_roles (user, role) VALUES (2, 2);
+INSERT INTO users_roles (user_id, role_id) VALUES (1, 1);
+INSERT INTO users_roles (user_id, role_id) VALUES (2, 1);
+INSERT INTO users_roles (user_id, role_id) VALUES (2, 2);
