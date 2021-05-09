@@ -1,6 +1,7 @@
 package leite.aquilla.hroauth.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,6 +16,15 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
+
+	@Value("${oauth.client.name}")
+	private String oauthClientName;
+
+	@Value("${oauth.client.secret}")
+	private String oauthClientSecret;
+
+	@Value("${jwt.token.expiration}")
+	private String jwtTokenExpiration;
 
 	BCryptPasswordEncoder bCryptPasswordEncoder;
 	JwtAccessTokenConverter jwtAccessTokenConverter;
@@ -34,18 +44,16 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-		security.tokenKeyAccess("permitAll()")
-			.checkTokenAccess("isAuthenticated()");
+		security.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()");
 	}
 
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-		clients.inMemory()
-			.withClient("myappname123")
-			.secret(bCryptPasswordEncoder.encode("myappsecret123"))
-			.scopes("read", "write")
-			.authorizedGrantTypes("password")
-			.accessTokenValiditySeconds(86400);
+		clients.inMemory().withClient(oauthClientName)
+			.secret(bCryptPasswordEncoder
+			.encode(oauthClientSecret))
+			.scopes("read", "write").authorizedGrantTypes("password")
+			.accessTokenValiditySeconds(Integer.parseInt(jwtTokenExpiration));
 	}
 
 	@Override

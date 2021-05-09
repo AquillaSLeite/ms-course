@@ -16,7 +16,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
 	
 	private static final String[] ROUTE_PUBLIC = {"/hr-oauth/oauth/token"};
 	private static final String[] ROUTE_OPERATOR = {"/hr-worker/**"};
-	private static final String[] ROUTE_ADMIN = {"/hr-payroll/**", "/hr-user/**"};
+	private static final String[] ROUTE_ADMIN = {"/hr-payroll/**", "/hr-user/**", "/actuator/**", "hr-oauth/actuator/**"};
 	
 	JwtAccessTokenConverter jwtAccessTokenConverter;
 	JwtTokenStore jwtTokenStore;
